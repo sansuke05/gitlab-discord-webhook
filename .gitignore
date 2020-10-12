@@ -125,4 +125,6 @@ yarn-error.log*
 .nyc_output
 *.lock
 
+# private files
 .clasp.json
+discordWebhook.js

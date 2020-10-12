@@ -13,11 +13,13 @@ function sendGitlabMergeInfo(requestObject) {
         return;
     }
 
-    attributes = requestObject["object_attributes"];
+    const attributes = requestObject["object_attributes"];
+    const repo = requestObject["repository"];
 
     const content = '**Gitlab Merge Request Event**\n' +
-        `action: ${attributes["action"]}\n` +
-        `url: ${attributes["url"]}\n`
+        `Repository: ${repo["name"]}\n` +
+        `Action: ${attributes["action"]}\n` +
+        `URL: ${attributes["url"]}\n`;
 
     const payload = {
         "content": content
@@ -29,8 +31,8 @@ function sendGitlabMergeInfo(requestObject) {
         "payload": JSON.stringify(payload)
     };
 
-    const url = "";
-    //UrlFetchApp.fetch(url, options);
+    const url = getWebhookUrl();
+    UrlFetchApp.fetch(url, options);
     return content;
 }
 
